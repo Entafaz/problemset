@@ -28,7 +28,7 @@ $(document).ready(function () {
     $('.nextSlideCarousal,.prevSlideCarousal').on("click", function(){
         width = $(".slide").width();
         let id = $(this).attr("id");
-
+        console.log($slides.length);
         if(id === "next") {
             currentSlide++;
             if (currentSlide == $slides.length + 1) {
@@ -37,7 +37,7 @@ $(document).ready(function () {
         } else {
             currentSlide--;
             if (currentSlide === 0) {
-                currentSlide = totalSlideCount;
+                currentSlide = $slides.length;
             }
         }
         var currentLeft = -(currentSlide - 1) * width;
@@ -46,26 +46,20 @@ $(document).ready(function () {
 
     //Navbar links show and hide in mobile view
     $(".icon").on('click', function() {
-        if (!$(".link-container").hasClass("check")) {
-            $(".link-container").addClass("check");
-        } else {
-            $(".link-container").removeClass("check")
-        } 
+        $(".link-container").toggleClass("check");
     });
 
     //Search pets by typing your faviourite pet's name
     $("#search").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $(".pets-section .pet-container").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+        searchFilter(value);
     });
 
     var $filterCheckboxes = $('input[type="checkbox"]');
 
     //Filter pets by category
     $filterCheckboxes.on('change', function() {
-        $(this).parent(".filterOption").siblings().find("input[type='checkbox']").prop('checked',false); //Remove other chekbox checked attr
+        $(this).parent(".filterOption").siblings().find($filterCheckboxes).prop('checked',false); //Remove other chekbox checked attr
         var selectedFilters = {}; //object for selected checkbox
         //filter checked checkbox value for selectedFilters
         $filterCheckboxes.filter(':checked').each(function() {
@@ -79,9 +73,7 @@ $(document).ready(function () {
         //if selected filter is empty then show all pets
         if (Object.keys(selectedFilters).length !== 0) {
             $.each(selectedFilters, function (name, filterValues) {
-                $(".pets-section .pet-container").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(filterValues) > -1)
-                });
+                searchFilter(filterValues);
             });
         } else {
             $(".pet-container").show();
@@ -89,3 +81,9 @@ $(document).ready(function () {
         
     });
 });
+//Search Filter Function
+function searchFilter(value) {
+    $(".pets-section .pet-container").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+}
