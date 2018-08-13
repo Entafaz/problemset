@@ -100,7 +100,7 @@ ul.slider-list > .slide > img {
     font-weight: 600;
 }
 .pet-container {
-  box-shadow: 2px 1px 0 0 #ccc, -5px -1px 5px -2px rgba(201, 195, 195, 0.75), 5px 4px 5px -2px rgba(0,0,0,0.75), 0px -1px 3px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 1px 0 0 #ccc, -5px -1px 5px -2px rgba(201, 195, 195, 0.75), 5px 4px 5px -2px rgba(169, 164, 164, 0.75), 0px -1px 3px 0px rgba(150, 146, 146, 0.75);
   box-sizing: border-box;
   padding-bottom: 10px;
   margin: 1em 3em;

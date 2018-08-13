@@ -23,12 +23,12 @@ $(document).ready(function () {
             clearInterval(interval);
         }
     });
+    startSlider();
 
     //change slide depend on id attr in prev or next button 
     $('.nextSlideCarousal,.prevSlideCarousal').on("click", function(){
         width = $(".slide").width();
         let id = $(this).attr("id");
-        console.log($slides.length);
         if(id === "next") {
             currentSlide++;
             if (currentSlide == $slides.length + 1) {
@@ -51,7 +51,8 @@ $(document).ready(function () {
 
     //Search pets by typing your faviourite pet's name
     $("#search").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
+        var value = $(this).val().trim().toLowerCase();
+        console.log(value);
         searchFilter(value);
     });
 
@@ -83,7 +84,37 @@ $(document).ready(function () {
 });
 //Search Filter Function
 function searchFilter(value) {
-    $(".pets-section .pet-container").filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $(".pets-section .pet-container").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) != -1);
     });
 }
+
+// function palidromString(str){
+//  	var revStr = "";
+//  	console.log(str);
+//  	for(var i=str.length-1; i>-1;i--) {
+//  		revStr += str[i];
+//  	}
+//  	console.log(revStr);
+//  	if(revStr === str) {
+//  		alert("Palindrom");
+//  	} else {
+//  		alert("Not Palindrom");
+//  	}
+//  }
+//  palidromString("nurses run");
+function sum(n) {
+	var sum = 0;
+	for(var i=n;i>0;i--) {
+		if(n%3 == 0) {
+			sum +=n;
+			console.log(n);
+		} else if(n%5 == 0) {
+			sum +=n;
+			console.log(n);
+		}
+		n--;
+	}
+	console.log(sum);
+}
+sum(15);
